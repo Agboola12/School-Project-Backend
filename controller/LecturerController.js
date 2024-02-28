@@ -159,8 +159,30 @@ const tutorImage = (req, res) => {
         })
 }
 
+const editTutor = (req, res) => {
+    const { _id } = req.params;
+    const { fullName, email, department } = req.body;
 
-module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage}
+    userChurch.findByIdAndUpdate(_id, { titles, fullName, email, mobile, postalCode, address, Dob, gender, })
+        .then(data => {
+            // console.log(data);
+            res.status(200).json({
+                status: true,
+                message: "User editing successful",
+                // data
+
+            })
+        }).catch(err => {
+            res.status(200).json({
+                status: false,
+                message: "An error in editing profile"
+            })
+            console.log(err, "wahala o in editing profile");
+        })
+}
+
+
+module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor}
 
 
   
