@@ -1,7 +1,7 @@
 const { genSalt, hash } = require('bcrypt');
 const  mongoose  = require('mongoose');
 
-const userChurchSchema = mongoose.Schema({
+const schoolLearningSchema = mongoose.Schema({
     fullName: String,
     email: {
         type: String,
@@ -14,13 +14,13 @@ const userChurchSchema = mongoose.Schema({
     }
 }, {timestamps:true})
 
-userChurchSchema.pre("save", async function (next) {
+schoolLearningSchema.pre("save", async function (next) {
         const salt = await genSalt(10);
         console.log(this.password)
         this.password = await hash(this.password, salt)
         next();
     })
 
-const userChurch = mongoose.model("userChurch", userChurchSchema);
+const schoolLearning = mongoose.model("schoolLearning", schoolLearningSchema);
 
-module.exports = userChurch
+module.exports = schoolLearning
