@@ -59,8 +59,87 @@ const tutorRegister = async (req, res) => {
     }
 };
 
+const tutorLogin = async (req, res) => {
+    const { email, password } = req.body;
 
-module.exports = { tutorRegister}
+    schoolLearning.findOne({ email }).select("+password").exec()
+        .then(async data => {
+            if (data) {
+                try {
+                    const validPassword = await compare(password, data.password)
+                    if (validPassword) {
+                        // jsonwebtoken
+                        const token = jwt.sign({
+                            email: data.email,
+                            _id: data._id
+                        },
+                            process.env.JWT_SECRET,
+
+                            { expiresIn: "12h" }
+                        )
+                        data.password = "";
+                        res.status(201).json({
+                            token,
+                            status: true,
+                            message: " Login successful",
+                            data: { email: req.body.email }
+                        })
+                    }
+                    else {
+                        res.status(203).json({
+                            status: false,
+                            message: " Password is not correct"
+                        })
+                    }
+                }
+                catch (error) {
+                    res.send(error)
+                    console.log(error);
+                }
+            }
+            else {
+                res.status(203).json({
+                    status: false,
+                    message: "Email does not match "
+                })
+            }
+        }).catch(err => {
+            if (err) {
+                res.status(500).json({
+                    status: false,
+                    message: err
+                })
+                console.log(err);
+            }
+        })
+}
+
+const getTutor = async (req, res) => {
+    let data = await jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
+
+    if (!data) {
+        res.send({ message: "Invalid token", status: false })
+    } else {
+        schoolLearning.findById(data._id)
+            .then(data => {
+                res.status(201).json({
+                    status: true,
+                    data,
+                    message: "User profile fetched"
+                })
+            })
+            .catch(err => {
+                res.status(203).json({
+                    status: false,
+                    message: "An error occurres when fetching user profile"
+                })
+                console.log(err, "Problem getting user");
+            })
+    }
+}
+
+
+module.exports = { tutorRegister, tutorLogin, getTutor}
 
 
   
