@@ -8,6 +8,7 @@ const schoolLearningSchema = mongoose.Schema({
         unique: true,
     },
     department: String,
+    userImageUrl:String,
     password: {
         type: String,
         select : false

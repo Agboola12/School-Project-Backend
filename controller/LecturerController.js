@@ -138,8 +138,29 @@ const getTutor = async (req, res) => {
     }
 }
 
+const tutorImage = (req, res) => {
+    const { _id } = req.params;
+    const image = (req.file.path);
 
-module.exports = { tutorRegister, tutorLogin, getTutor}
+    schoolLearning.findByIdAndUpdate(_id, { userImageUrl: image })
+        .then(data => {
+            res.status(201).json({
+                status: true,
+                message: "Profile updated successfully.",
+                // data
+
+            })
+        }).catch(err => {
+            res.status(203).json({
+                status: false,
+                message: "An error in editing profile"
+            })
+            console.log(err, "wahala o in editing profile");
+        })
+}
+
+
+module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage}
 
 
   
