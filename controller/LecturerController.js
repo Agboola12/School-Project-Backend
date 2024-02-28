@@ -163,12 +163,12 @@ const editTutor = (req, res) => {
     const { _id } = req.params;
     const { fullName, email, department } = req.body;
 
-    userChurch.findByIdAndUpdate(_id, { titles, fullName, email, mobile, postalCode, address, Dob, gender, })
+    schoolLearning.findByIdAndUpdate(_id, {  fullName, email, department })
         .then(data => {
             // console.log(data);
             res.status(200).json({
                 status: true,
-                message: "User editing successful",
+                message: "User Editing successful",
                 // data
 
             })
