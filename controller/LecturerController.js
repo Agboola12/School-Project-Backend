@@ -181,8 +181,47 @@ const editTutor = (req, res) => {
         })
 }
 
+const getAllUser = (req, res)=>{   
+    schoolLearning.find({ })
+        .then(data => {
+            if (data) {
+                res.status(201).send({
+                    status: true,
+                    message: "Successful in getting All Tutor ",
+                    data
+                })
+            }
+        }).catch(err => {
+            res.status(203).send({
+                status: false,
+                message: "No Tutor Found ",
+            })
+            console.log("Error in getting Tutor:", err);
+        })
+}
 
-module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor}
+const tutorDetails = (req, res)=>{
+    const _id = req.params   
+    schoolLearning.findOne({_id })
+        .then(data => {
+            if (data) {
+                res.status(200).send({
+                    status: true,
+                    message: "Successful in getting Tutor Details ",
+                    data
+                })
+            }
+        }).catch(err => {
+            res.status(200).send({
+                status: false,
+                message: "Failed in gettings Tutor Details",
+            })
+            console.log("Error in getting  Tutor Details:", err);
+        })
+}
+
+
+module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails}
 
 
   
