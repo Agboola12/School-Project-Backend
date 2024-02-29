@@ -41,22 +41,47 @@ const getDocument = (req, res)=>{
 const delInfo = (req, res) => {
     const { _id } = req.params;
 
-    adminNews.deleteOne({ _id })
+    tutorDocument.deleteOne({ _id })
         .then(data => {
             res.status(200).json({
                 status: true,
-                message: "Success in Deleting an News and Event",
+                message: "Success in Deleting an Document",
                 data
             })
         })
         .catch(err => {
             res.status(200).json({
                 status: false,
-                message: "Failed in Deleting an News and Event",
+                message: "Failed in Deleting an Document",
             })
-            console.log(err, "problem in deleting users");
+            console.log(err, "problem in deleting document");
         })
 }
 
 
-module.exports = {tutorInfo, getDocument, delInfo}
+const EditInfo =(req,res)=>{
+    const { _id } = req.params;
+    const { title, youtubeLink, pdfLink } = req.body;
+    
+    const document = (req.file.path);
+   
+    adminNews.findByIdAndUpdate(_id,{ title, youtubeLink, pdfLink ,pdfFile:document })
+        .then(data => {
+            // console.log(data);
+            res.status(201).json({
+                status: true,
+                message: "Document Editing successful",
+                // data
+
+            })
+        }).catch(err => {
+            res.status(203).json({
+                status: false,
+                message: "An error in editing Document"
+            })
+            console.log(err, "wahala o in in Document");
+        })
+}
+
+
+module.exports = {tutorInfo, getDocument, delInfo, EditInfo}
