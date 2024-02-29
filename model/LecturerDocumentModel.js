@@ -5,6 +5,7 @@ const tutorDocumentSchema = mongoose.Schema({
     youtubeLink: String,
     pdfLink:String,
     pdfFile:String,
+    userId:String,
     
 }, {timestamps:true})
 

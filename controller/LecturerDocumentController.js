@@ -1,10 +1,10 @@
 const tutorDocument = require("../model/LecturerDocumentModel");
 
 const tutorInfo = async (req, res) => {  
-    const { title, youtubeLink, pdfLink } = req.body;
+    const { title, youtubeLink, pdfLink, userId } = req.body;
     const docs = (req.file.path);
     try {
-        const newInfo = await tutorDocument.create({ title, youtubeLink, pdfLink, pdfFile:docs });
+        const newInfo = await tutorDocument.create({ title, youtubeLink, pdfLink, pdfFile:docs, userId });
         return res.status(201).json({
             status: true,
             message: "Document Submitted! This update will be shared with the Students.",
@@ -58,6 +58,7 @@ const delInfo = (req, res) => {
 }
 
 
+
 const EditInfo =(req,res)=>{
     const { _id } = req.params;
     const { title, youtubeLink, pdfLink } = req.body;
@@ -80,5 +81,24 @@ const EditInfo =(req,res)=>{
         })
 }
 
+const getInfo = (req, res) => {
+    const user = req.params.id;
+    tutorDocument.find({ userId: user })
+    .then(data => {
+            res.status(201).json({
+                status: true,
+                message: "Success in getting an Document",
+                data
+            })
+        })
+        .catch(err => {
+            res.status(203).json({
+                status: false,
+                message: "Failed in getting an Document",
+            })
+            console.log(err, "problem in getting document");
+        })
+}
 
-module.exports = {tutorInfo, getDocument, delInfo, EditInfo}
+
+module.exports = {tutorInfo, getDocument, delInfo, EditInfo, getInfo}
