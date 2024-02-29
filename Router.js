@@ -12,8 +12,8 @@ rout.patch("/tutorImage/:_id",upload.single("userImageUrl") , tutorImage )
 rout.patch("/editTutor/:_id", editTutor )
 
 // document
-rout.patch("/tutorInfo",upload.single("file") , tutorInfo )
-rout.patch("/getDocument", getDocument )
+rout.post("/tutorInfo",upload.single("pdfFile") , tutorInfo )
+rout.get("/getDocument", getDocument )
 
 
 

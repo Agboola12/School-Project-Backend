@@ -2,9 +2,9 @@ const tutorDocument = require("../model/LecturerDocumentModel");
 
 const tutorInfo = async (req, res) => {  
     const { title, youtubeLink, pdfLink } = req.body;
-    const file = (req.file.path);
+    const docs = (req.file.path);
     try {
-        const newInfo = await tutorDocument.create({ title, youtubeLink, pdfLink, pdfFile:file });
+        const newInfo = await tutorDocument.create({ title, youtubeLink, pdfLink, pdfFile:docs });
         return res.status(201).json({
             status: true,
             message: "Document Submitted! This update will be shared with the Students.",
