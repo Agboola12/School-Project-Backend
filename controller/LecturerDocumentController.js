@@ -38,5 +38,25 @@ const getDocument = (req, res)=>{
         })
 }
 
+const delInfo = (req, res) => {
+    const { _id } = req.params;
 
-module.exports = {tutorInfo, getDocument}
+    adminNews.deleteOne({ _id })
+        .then(data => {
+            res.status(200).json({
+                status: true,
+                message: "Success in Deleting an News and Event",
+                data
+            })
+        })
+        .catch(err => {
+            res.status(200).json({
+                status: false,
+                message: "Failed in Deleting an News and Event",
+            })
+            console.log(err, "problem in deleting users");
+        })
+}
+
+
+module.exports = {tutorInfo, getDocument, delInfo}

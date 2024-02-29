@@ -14,6 +14,8 @@ rout.patch("/editTutor/:_id", editTutor )
 // document
 rout.post("/tutorInfo",upload.single("pdfFile") , tutorInfo )
 rout.get("/getDocument", getDocument )
+rout.delete("/delInfo/:_id",delInfo )
+
 
 
 
