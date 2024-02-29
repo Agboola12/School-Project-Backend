@@ -40,7 +40,6 @@ const getDocument = (req, res)=>{
 
 const delInfo = (req, res) => {
     const { _id } = req.params;
-
     tutorDocument.deleteOne({ _id })
         .then(data => {
             res.status(200).json({
@@ -65,14 +64,12 @@ const EditInfo =(req,res)=>{
     
     const document = (req.file.path);
    
-    adminNews.findByIdAndUpdate(_id,{ title, youtubeLink, pdfLink ,pdfFile:document })
+    tutorDocument.findByIdAndUpdate(_id,{ title, youtubeLink, pdfLink ,pdfFile:document })
         .then(data => {
-            // console.log(data);
             res.status(201).json({
                 status: true,
                 message: "Document Editing successful",
                 // data
-
             })
         }).catch(err => {
             res.status(203).json({
