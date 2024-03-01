@@ -22,9 +22,10 @@ const tutorRegister = async (req, res) => {
     
     try {
         const alreadyExists = await schoolLearning.findOne({ email });
+        console.log(alreadyExists)
 
         if (alreadyExists) {
-            return res.status(203).json({
+            return res.status(200).json({
                 status: false,
                 message: "Email already exists",
             });
@@ -36,6 +37,7 @@ const tutorRegister = async (req, res) => {
 
         const verificationLink = `${process.env.FrontendUrl}verify?token=${verificationToken}`;
 
+
         
         await transporter.sendMail({
             from: process.env.APP_MAIL,
@@ -43,7 +45,7 @@ const tutorRegister = async (req, res) => {
             subject: 'Successful',
             html:
                 `<div>
-                    <h1 class="text-center">RCCG Victory Centre</h1><br/>
+                    <h1 class="text-center">Learning Site</h1><br/>
                     <p>Welcome to our Student Learning Site. Enjoy your stays with us</p>
                     <h3>${req.body.fullName}</h3>
                     <p>Please click the following link to verify your account:</p>
@@ -66,10 +68,38 @@ const tutorRegister = async (req, res) => {
     }
 };
 
+const verifyToken =async (req, res)=>{
+    const { token } = req.params;
+    console.log(token)
+    try {
+      // Verify the token
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      
+      // Update user's verification status in the database
+      const user = await schoolLearning.findOneAndUpdate(
+          { email: decoded.email },
+          { $set: { isVerified: true }, $unset: { verificationToken: '' } }
+          );
+        //   console.log(user)
+  
+      if (!user) return res.status(404).send('Invalid verification token.');
+       return res.status(201).json({
+        status: true,
+        message:"success"
+    });
+      
+      // Redirect to success page after verification
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error verifying email.');
+    }
+};
+
 const tutorLogin = async (req, res) => {
     const { email, password } = req.body;
 
-    schoolLearning.findOne({ email }).select("+password").exec()
+    schoolLearning.findOne({ email, isVerified:true }).select("+password").exec()
         .then(async data => {
             if (data) {
                 try {
@@ -247,7 +277,7 @@ const getAll = (req, res)=>{
 }
 
 
-module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails, getAll}
+module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails, getAll, verifyToken }
 
 
   

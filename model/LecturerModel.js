@@ -9,6 +9,10 @@ const schoolLearningSchema = mongoose.Schema({
     },
     department: String,
     userImageUrl:String,
+    isVerified:{
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         select : false
