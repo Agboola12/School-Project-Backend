@@ -40,4 +40,4 @@ const getTestimony = (req, res)=>{
 }
 
 
-module.exports ={userTestimony}
+module.exports ={userTestimony, getTestimony}

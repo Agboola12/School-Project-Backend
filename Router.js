@@ -4,7 +4,7 @@ const { verifyUser } = require('./middleware/authMiddleware');
 const { upload ,uploadFile} = require('./UploadImage');
 const { tutorInfo, getDocument, delInfo, EditInfo, getInfo } = require('./controller/LecturerDocumentController');
 const { forgottenPassword, resetPassword } = require('./controller/ForgottenPasswordController');
-const { userTestimony } = require('./controller/TestimonyController');
+const { userTestimony, getTestimony } = require('./controller/TestimonyController');
 const rout = express.Router();
 
 // tutor
@@ -21,6 +21,7 @@ rout.get("/getAll", getAll )
 
 // Testimonies
 rout.post("/schoolTestimony", userTestimony )
+rout.get("/getTestimony", getTestimony )
 
 
 rout.post("/forgottenPassword", forgottenPassword )
