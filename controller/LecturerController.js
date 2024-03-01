@@ -219,7 +219,7 @@ const editTutor = (req, res) => {
 }
 
 const getAllUser = (req, res)=>{   
-    schoolLearning.find({ })
+    schoolLearning.find({ isVerified: true})
         .then(data => {
             if (data) {
                 res.status(201).send({
@@ -258,7 +258,7 @@ const tutorDetails = (req, res)=>{
 }
 
 const getAll = (req, res)=>{   
-    schoolLearning.find({}, null, { limit: 3 })
+    schoolLearning.find({ isVerified: true }, null, { limit: 3 })
         .then(data => {
             if (data) {
                 res.status(201).send({

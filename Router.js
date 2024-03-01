@@ -1,7 +1,7 @@
 const express = require('express');
 const { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails, getAll, verifyToken } = require('./controller/LecturerController');
 const { verifyUser } = require('./middleware/authMiddleware');
-const { upload } = require('./UploadImage');
+const { upload ,uploadFile} = require('./UploadImage');
 const { tutorInfo, getDocument, delInfo, EditInfo, getInfo } = require('./controller/LecturerDocumentController');
 const rout = express.Router();
 
@@ -19,10 +19,10 @@ rout.get("/getAll", getAll )
 
 
 // document
-rout.post("/tutorInfo",upload.single("pdfFile") , tutorInfo )
+rout.post("/tutorInfo",uploadFile.single("pdfFile") , tutorInfo )
 rout.get("/getDocument", getDocument )
 rout.delete("/delInfo/:_id",delInfo )
-rout.patch("/EditInfo/:_id", upload.single("pdfFile"), EditInfo )
+rout.patch("/EditInfo/:_id", uploadFile.single("pdfFile"), EditInfo )
 rout.get("/getInfo/:id", getInfo )
 
 
