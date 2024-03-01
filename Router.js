@@ -1,5 +1,5 @@
 const express = require('express');
-const { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails } = require('./controller/LecturerController');
+const { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails, getAll } = require('./controller/LecturerController');
 const { verifyUser } = require('./middleware/authMiddleware');
 const { upload } = require('./UploadImage');
 const { tutorInfo, getDocument, delInfo, EditInfo, getInfo } = require('./controller/LecturerDocumentController');
@@ -13,6 +13,7 @@ rout.patch("/tutorImage/:_id",upload.single("userImageUrl") , tutorImage )
 rout.patch("/editTutor/:_id", editTutor )
 rout.get("/getAllUser", getAllUser )
 rout.get("/tutorDetails/:_id", tutorDetails )
+rout.get("/getAll", getAll )
 
 
 // document

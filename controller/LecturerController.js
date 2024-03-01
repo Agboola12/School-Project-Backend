@@ -220,8 +220,27 @@ const tutorDetails = (req, res)=>{
         })
 }
 
+const getAll = (req, res)=>{   
+    schoolLearning.find({}, null, { limit: 3 })
+        .then(data => {
+            if (data) {
+                res.status(201).send({
+                    status: true,
+                    message: "Successful in getting All Tutor ",
+                    data
+                })
+            }
+        }).catch(err => {
+            res.status(203).send({
+                status: false,
+                message: "No Tutor Found ",
+            })
+            console.log("Error in getting Tutor:", err);
+        })
+}
 
-module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails}
+
+module.exports = { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, tutorDetails, getAll}
 
 
   
