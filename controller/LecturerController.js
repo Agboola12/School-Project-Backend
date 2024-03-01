@@ -29,8 +29,13 @@ const tutorRegister = async (req, res) => {
                 message: "Email already exists",
             });
         }
+
+        const verificationToken = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '12h' });
         
         const newUser = await schoolLearning.create({ fullName, email, department, password  });
+
+        const verificationLink = `${process.env.FrontendUrl}verify?token=${verificationToken}`;
+
         
         await transporter.sendMail({
             from: process.env.APP_MAIL,
@@ -41,12 +46,14 @@ const tutorRegister = async (req, res) => {
                     <h1 class="text-center">RCCG Victory Centre</h1><br/>
                     <p>Welcome to our Student Learning Site. Enjoy your stays with us</p>
                     <h3>${req.body.fullName}</h3>
+                    <p>Please click the following link to verify your account:</p>
+                    <a href="${verificationLink}">${verificationLink}</a>
                 </div>`
         })
             // console.log(newUser);
         return res.status(201).json({
             status: true,
-            message: "Welcome to our Student Learning Site. Enjoy your stays with us.",
+            message: "Account Created! Excited to journey together! Please check your email for verification.",
             data: newUser,
         })
 
