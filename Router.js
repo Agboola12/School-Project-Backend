@@ -18,6 +18,9 @@ rout.get("/getAllUser", getAllUser )
 rout.get("/tutorDetails/:_id", tutorDetails )
 rout.get("/getAll", getAll )
 
+// Testimonies
+rout.post("/schoolTestimony", schoolTestimony )
+
 
 rout.post("/forgottenPassword", forgottenPassword )
 rout.post("/resetPassword", resetPassword )
