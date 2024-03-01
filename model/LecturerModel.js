@@ -13,6 +13,11 @@ const schoolLearningSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    verificationToken: String,
+    otp :{
+        type: Number,
+        default: null
+    },
     password: {
         type: String,
         select : false

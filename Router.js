@@ -3,6 +3,7 @@ const { tutorRegister, tutorLogin, getTutor, tutorImage, editTutor, getAllUser, 
 const { verifyUser } = require('./middleware/authMiddleware');
 const { upload ,uploadFile} = require('./UploadImage');
 const { tutorInfo, getDocument, delInfo, EditInfo, getInfo } = require('./controller/LecturerDocumentController');
+const { forgottenPassword, resetPassword } = require('./controller/ForgottenPasswordController');
 const rout = express.Router();
 
 // tutor
@@ -16,6 +17,11 @@ rout.patch("/editTutor/:_id", editTutor )
 rout.get("/getAllUser", getAllUser )
 rout.get("/tutorDetails/:_id", tutorDetails )
 rout.get("/getAll", getAll )
+
+
+rout.post("/forgottenPassword", forgottenPassword )
+rout.post("/resetPassword", resetPassword )
+
 
 
 // document
