@@ -21,7 +21,8 @@ const userTestimony = async (req, res) => {
 };
 
 const getTestimony = (req, res)=>{   
-    SchoolTestimony.find( { limit: 3 })
+    // SchoolTestimony.find({}, null, { limit: 3 })
+    SchoolTestimony.find().sort({ createdAt: -1 }).limit(3)
         .then(data => {
             if (data) {
                 res.status(201).send({

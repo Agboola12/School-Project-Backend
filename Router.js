@@ -20,7 +20,7 @@ rout.get("/tutorDetails/:_id", tutorDetails )
 rout.get("/getAll", getAll )
 
 // Testimonies
-rout.post("/schoolTestimony", userTestimony )
+rout.post("/userTestimony", userTestimony )
 rout.get("/getTestimony", getTestimony )
 
 
