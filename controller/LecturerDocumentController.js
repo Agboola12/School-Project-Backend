@@ -2,11 +2,11 @@ const { FirebaseImageUpload } = require("../firebase");
 const tutorDocument = require("../model/LecturerDocumentModel");
 
 const tutorInfo = async (req, res) => {  
-    const { title, youtubeLink, pdfLink, userId } = req.body;
-    const docs = (req.file.path);
+    const { courseTitle,courseCode, youtubeLink, pdfLink, userId } = req.body;
+    // const docs = (req.file.path);
    let result= await FirebaseImageUpload(req.file)
     try {
-        const newInfo = await tutorDocument.create({ title, youtubeLink, pdfLink, pdfFile:result, userId });
+        const newInfo = await tutorDocument.create({ courseTitle, courseCode ,youtubeLink, pdfLink, pdfFile:result, userId });
         return res.status(201).json({
             status: true,
             message: "Document Submitted! This update will be shared with the Students.",

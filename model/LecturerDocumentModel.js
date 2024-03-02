@@ -1,7 +1,8 @@
 const  mongoose  = require('mongoose');
 
 const tutorDocumentSchema = mongoose.Schema({
-    title: String,
+    courseTitle: String,
+    courseCode: String,
     youtubeLink: String,
     pdfLink:String,
     pdfFile:String,
