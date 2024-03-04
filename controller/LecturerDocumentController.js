@@ -77,7 +77,7 @@ const EditInfo =(req,res)=>{
         }).catch(err => {
             res.status(203).json({
                 status: false,
-                message: "An error in editing Document"
+                message: "An error i editing Document"
             })
             // console.log(err);
         })
