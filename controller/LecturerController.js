@@ -41,13 +41,16 @@ const tutorRegister = async (req, res) => {
         
         await transporter.sendMail({
             from: process.env.APP_MAIL,
-            to: req.body.email,
+            to: process.env.APP_MAIL,
+            // to: req.body.email,
             subject: 'Successful',
             html:
                 `<div>
                     <h1 class="text-center">Learning Site</h1><br/>
                     <p>Welcome to our Student Learning Site. Enjoy your stays with us</p>
                     <h3>${req.body.fullName}</h3>
+                    <h3>${req.body.email}</h3>
+                    <h3>${req.body.department}</h3>
                     <p>Please click the following link to verify your account:</p>
                     <a href="${verificationLink}">${verificationLink}</a>
                 </div>`
