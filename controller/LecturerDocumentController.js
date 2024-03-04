@@ -36,7 +36,7 @@ const getDocument = (req, res)=>{
                 status: false,
                 message: "No Sermon Found ",
             })
-            console.log("Error in getting info:", err);
+            console.log( err);
         })
 }
 
@@ -55,7 +55,7 @@ const delInfo = (req, res) => {
                 status: false,
                 message: "Failed in Deleting an Document",
             })
-            console.log(err, "problem in deleting document");
+            console.log(err);
         })
 }
 
@@ -79,7 +79,7 @@ const EditInfo =(req,res)=>{
                 status: false,
                 message: "An error in editing Document"
             })
-            console.log(err, "wahala o  in in Document");
+            console.log(err.message);
         })
 }
 
@@ -98,7 +98,7 @@ const getInfo = (req, res) => {
                 status: false,
                 message: "Failed in getting an Document",
             })
-            console.log(err, "problem in getting document");
+            console.log(err.message);
         })
 }
 
