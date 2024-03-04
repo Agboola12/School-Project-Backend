@@ -79,7 +79,7 @@ const EditInfo =(req,res)=>{
                 status: false,
                 message: "An error in editing Document"
             })
-            console.log(err, "problem in in Document");
+            console.log(err, "wahala o  in in Document");
         })
 }
 
