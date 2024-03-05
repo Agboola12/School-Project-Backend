@@ -21,8 +21,9 @@ const tutorInfo = async (req, res) => {
     }
 };
 
-const getDocument = (req, res)=>{   
-    tutorDocument.find({ })
+const getDocument = (req, res)=>{
+    const userId = req.params   
+    tutorDocument.find({ userId})
         .then(data => {
             if (data) {
                 res.status(201).send({

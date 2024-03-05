@@ -31,7 +31,7 @@ rout.post("/resetPassword", resetPassword )
 
 // document
 rout.post("/tutorInfo",uploadFile.single("pdfFile") , tutorInfo )
-rout.get("/getDocument", getDocument )
+rout.get("/getDocument/:_id", getDocument )
 rout.delete("/delInfo/:_id",delInfo )
 rout.patch("/EditInfo/:_id", uploadFile.single("pdfFile"), EditInfo )
 rout.get("/getInfo/:id", getInfo )
